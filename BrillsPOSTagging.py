@@ -9,6 +9,7 @@ class Token:
         self.correctTag = correctTag
         self.lineNum = lineNum
     
+
 def unigramProb(tokens):
     token_count = {}
     pos_count = {}
@@ -31,7 +32,6 @@ def unigramProb(tokens):
             pos_prob[word][pos] = posCount/token_count[word]
             
     return pos_prob
-
 
 
 def get_best_instance(tokens):
@@ -78,7 +78,6 @@ def get_best_instance(tokens):
     return bestRule
 
 
-
 def readFromFile():
     tokens = []
     with open('./NLP6320_POSTaggedTrainingSet-Windows.txt', 'r') as myfile:
@@ -93,6 +92,7 @@ def readFromFile():
             tokens.append(token)
     return tokens
 
+
 def maxPosProb(pos_prob):
     max_prob_pos = {}
     for word, wordPOSProb in pos_prob.items():
@@ -105,6 +105,7 @@ def maxPosProb(pos_prob):
 
         max_prob_pos[word] = maxPos
     return max_prob_pos
+
 
 def BrillsPOSTagging():
     tokens = readFromFile()
@@ -123,7 +124,7 @@ def BrillsPOSTagging():
 
             if token.currentTag == rule['fromTag'] and tokens[index - 1].currentTag == rule['context']:
                 token.currentTag = rule['toTag']
-		topRules.append(rule)
+	topRules.append(rule)
     file1 = open("brillsRules.txt", "w")
     file1.write("FromTag" + "\t\t\t" + "ToTag" + "\t\t\t" + "Condition" + "\t\t\t" + "Score" + "\n")
     for rule in topRules:
